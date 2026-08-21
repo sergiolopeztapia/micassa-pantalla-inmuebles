@@ -4,9 +4,16 @@
   --green: #8fc93a;
   --text-dark: #4a4a4a;
   --text-orange: #d98a3d;
-  --card-pad-top: 20px;
-  --card-pad-side: 28px;
-  --header-height: 76px;
+  --screen-scale: 1;
+  --card-pad-top: calc(20px * var(--screen-scale));
+  --card-pad-side: calc(28px * var(--screen-scale));
+  --header-height: calc(76px * var(--screen-scale));
+}
+
+@media (min-width: 3200px) and (min-height: 1800px) {
+  :root {
+    --screen-scale: 2.1;
+  }
 }
 
 .screen {
@@ -14,6 +21,7 @@
   height: 100vh;
   display: flex;
   background: #d9d9d9;
+  overflow: hidden;
 }
 
 .card {
@@ -51,8 +59,8 @@
 
 .rotation-clock {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: calc(64px * var(--screen-scale));
+  height: calc(64px * var(--screen-scale));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +106,7 @@
   z-index: 1;
   display: flex;
   color: var(--orange);
-  font-size: 26px;
+  font-size: calc(26px * var(--screen-scale));
   line-height: 1;
 }
 
@@ -115,13 +123,13 @@
   display: flex;
   align-items: baseline;
   gap: 2px;
-  padding: 12px 24px;
+  padding: calc(12px * var(--screen-scale)) calc(24px * var(--screen-scale));
   background: #fff;
   border: 1px solid #eee;
   border-radius: 999px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   font-weight: 700;
-  font-size: 29px;
+  font-size: calc(29px * var(--screen-scale));
   letter-spacing: 0.5px;
   color: #4a4a4a;
 }
@@ -150,10 +158,10 @@
 
 .badge--title {
   flex: 1;
-  font-size: 41px;
+  font-size: calc(41px * var(--screen-scale));
   font-weight: 800;
   letter-spacing: 2px;
-  padding: 14px;
+  padding: calc(14px * var(--screen-scale));
 }
 
 .badge-stack {
@@ -163,19 +171,26 @@
   gap: 6px;
 }
 
+@media (min-width: 3200px) and (min-height: 1800px) {
+  .badge-stack {
+    width: calc(260px * var(--screen-scale));
+    gap: calc(6px * var(--screen-scale));
+  }
+}
+
 .badge--small {
   flex: 1;
-  font-size: 19px;
+  font-size: calc(19px * var(--screen-scale));
   font-weight: 700;
-  padding: 6px;
+  padding: calc(6px * var(--screen-scale));
 }
 
 /* Subtitle */
 .card__subtitle {
   color: var(--text-orange);
   font-weight: 400;
-  font-size: 31px;
-  margin: 0 0 16px;
+  font-size: calc(31px * var(--screen-scale));
+  margin: 0 0 calc(16px * var(--screen-scale));
 }
 
 /* Body */
@@ -234,8 +249,9 @@
   background: var(--green);
   color: #fff;
   font-weight: 700;
-  font-size: 31px;
-  padding: 8px 24px 8px 14px;
+  font-size: calc(31px * var(--screen-scale));
+  padding: calc(8px * var(--screen-scale)) calc(24px * var(--screen-scale))
+    calc(8px * var(--screen-scale)) 14px;
   clip-path: polygon(0 0, 100% 0, 92% 100%, 0% 100%);
 }
 
@@ -248,7 +264,7 @@
 
 .details__text {
   color: var(--text-orange);
-  font-size: 22px;
+  font-size: calc(22px * var(--screen-scale));
   line-height: 1.4;
   flex: 1;
   margin: 0;
@@ -263,7 +279,7 @@
 }
 
 .ref {
-  font-size: 14px;
+  font-size: calc(14px * var(--screen-scale));
   color: #999;
   align-self: flex-end;
 }
@@ -271,10 +287,10 @@
 .price {
   background: var(--orange);
   color: #fff;
-  font-size: 36px;
+  font-size: calc(36px * var(--screen-scale));
   font-weight: 700;
   text-align: center;
-  padding: 10px;
+  padding: calc(10px * var(--screen-scale));
 }
 
 /* Features */
@@ -288,15 +304,15 @@
 .feature {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: calc(10px * var(--screen-scale));
   color: var(--orange-dark);
-  font-size: 58px;
+  font-size: calc(58px * var(--screen-scale));
   font-weight: 700;
 }
 
 .feature__icon {
-  width: 64px;
-  height: 64px;
+  width: calc(64px * var(--screen-scale));
+  height: calc(64px * var(--screen-scale));
   flex-shrink: 0;
 }
 
@@ -314,19 +330,19 @@
 }
 
 .logo {
-  height: 40px;
+  height: calc(40px * var(--screen-scale));
   width: auto;
   display: block;
 }
 
 .url {
-  font-size: 26px;
+  font-size: calc(26px * var(--screen-scale));
   font-weight: 700;
   color: var(--orange);
 }
 
 .legal {
-  font-size: 11px;
+  font-size: calc(11px * var(--screen-scale));
   color: #999;
   text-align: center;
   margin: 4px 0 0;
