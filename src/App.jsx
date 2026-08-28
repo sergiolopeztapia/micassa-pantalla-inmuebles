@@ -11,17 +11,25 @@ import Page2 from "./pages/Page2";
 import Page3 from "./pages/Page3";
 import Page4 from "./pages/Page4";
 import { RotationContext } from "./RotationContext";
+import initLogo from "./assets/micassa-logo-init.png";
 
 const PAGES = ["/1", "/2", "/3", "/4"];
-const ROTATION_MS = 10000;
+const ROTATION_MS = 5000;
+const INITIAL_LOADING_MS = 5000;
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const currentIndex = Math.max(PAGES.indexOf(location.pathname), 0);
+  const [isLoading, setIsLoading] = useState(true);
   const [paused, setPaused] = useState(false);
   const remainingRef = useRef(ROTATION_MS);
   const startRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), INITIAL_LOADING_MS);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Reset the countdown budget whenever the page actually changes.
   useEffect(() => {
@@ -29,7 +37,7 @@ function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (paused) return undefined;
+    if (isLoading || paused) return undefined;
     startRef.current = Date.now();
     const timer = setTimeout(() => {
       const nextIndex = (currentIndex + 1) % PAGES.length;
@@ -42,9 +50,22 @@ function App() {
         0,
       );
     };
-  }, [location.pathname, paused, currentIndex, navigate]);
+  }, [location.pathname, paused, currentIndex, isLoading, navigate]);
 
   const togglePause = () => setPaused((value) => !value);
+
+  if (isLoading) {
+    return (
+      <main className="initial-loader" aria-label="Cargando MiCasa">
+        <div className="initial-loader__content">
+          <img className="initial-loader__logo" src={initLogo} alt="MiCasa" />
+          <div className="initial-loader__progress" aria-hidden="true">
+            <span />
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <RotationContext.Provider
